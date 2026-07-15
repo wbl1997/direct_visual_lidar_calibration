@@ -130,17 +130,6 @@ target_link_libraries(initial_guess_manual
   direct_visual_lidar_calibration
 )
 
-# initial_guess_auto
-add_executable(initial_guess_auto
-  src/initial_guess_auto.cpp
-)
-target_include_directories(initial_guess_auto PRIVATE
-  ${catkin_INCLUDE_DIRS}
-)
-target_link_libraries(initial_guess_auto
-  direct_visual_lidar_calibration
-)
-
 # calibrate
 add_executable(calibrate
   src/calibrate.cpp
@@ -172,7 +161,6 @@ install(
   TARGETS
   preprocess_map
   initial_guess_manual
-  initial_guess_auto
   calibrate
   viewer
   DESTINATION
@@ -184,7 +172,6 @@ if($ENV{ROS_VERSION} EQUAL 1)
 else()
   # ROS2
   ament_python_install_package(${PROJECT_NAME})
-  install(PROGRAMS scripts/find_matches_superglue.py DESTINATION lib/${PROJECT_NAME})
   ament_export_libraries(direct_visual_lidar_calibration)
   ament_auto_package()
 endif()

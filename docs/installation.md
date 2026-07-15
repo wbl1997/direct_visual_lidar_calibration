@@ -14,7 +14,6 @@
 - [GTSAM](https://gtsam.org/)
 - [Ceres](http://ceres-solver.org/)
 - [Iridescence](https://github.com/koide3/iridescence)
-- [SuperGlue](https://github.com/magicleap/SuperGluePretrainedNetwork) [optional]
 
 ## Install Common dependencies
 
@@ -39,7 +38,7 @@ git clone --recurse-submodules https://github.com/ceres-solver/ceres-solver
 cd ceres-solver
 git checkout e47a42c2957951c9fafcca9995d9927e15557069
 mkdir build && cd build
-cmake .. -DBUILD_EXAMPLES=OFF -DBUILD_TESTING=OFF -DUSE_CUDA=OFF
+cmake .. -DBUILD_EXAMPLES=OFF -DBUILD_TESTING=OFF
 make -j$(nproc)
 sudo make install
 
@@ -49,19 +48,6 @@ mkdir iridescence/build && cd iridescence/build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j$(nproc)
 sudo make install
-```
-
-## Install SuperGlue (Optional)
-
-!!!warning
-    [SuperGlue](https://github.com/magicleap/SuperGluePretrainedNetwork.git) is not allowed to be used for commercial purposes. You must carefully check and follow its licensing conditions.
-
-```bash
-pip3 install numpy opencv-python torch matplotlib
-git clone https://github.com/magicleap/SuperGluePretrainedNetwork.git
-
-echo 'export PYTHONPATH=$PYTHONPATH:/path/to/SuperGluePretrainedNetwork' >> ~/.bashrc
-source ~/.bashrc
 ```
 
 ## Build direct_visual_lidar_calibration

@@ -67,25 +67,6 @@ $ ros2 run direct_visual_lidar_calibration initial_guess_manual preprocessed_dat
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FTlC9RwEVxY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
-### Option2: Automatic estimation
-
-!!!warning
-    SuperGlue is not allowed to be used for commercial purposes!!
-
-```bash
-$ ros2 run direct_visual_lidar_calibration find_matches_superglue.py preprocessed_data_path
-$ ros2 run direct_visual_lidar_calibration initial_guess_auto preprocessed_data_path
-```
-
-!!!note
-    SuperGlue requires the upward directions of camera and LiDAR images are roughly aligned. Use ```--rotate_camera``` and ```--rotate_lidar``` options to ensure this. (e.g., ```--rotate_camera 90```. Only 90, 180, and 270 degree rotations are allowed.)
-
-!!!note
-    You can find ```*_superglue.png``` saved in the data directory that represents detected 2D-3D correspondences.
-![rosbag2_2022_12_09-11_51_00_superglue](https://user-images.githubusercontent.com/31344317/213388449-e1a80f56-1cc7-45b6-bf0e-239505e3dc24.png)
-
-
-
 ## 3. Calibration
 
 ```bash

@@ -5,7 +5,7 @@ This package provides a toolbox for LiDAR-Camera calibration that is:
 - **Generalizable**: It can handle various LiDAR and camera projection models including spinning and non-repetitive scan LiDARs, and pinhole, fisheye, and omnidirectional projection cameras.
 - **Target-less**: It does not require a calibration target but uses the environment structure and texture for calibration.
 - **Single-shot**: At a minimum, only one pairing of a LiDAR point cloud and a camera image is required for calibration. Optionally, multiple LiDAR-camera data pairs can be used for improving the accuracy.
-- **Automatic**: The calibration process is automatic and does not require an initial guess.
+- **Manual initialization**: The initial LiDAR-camera pose is selected manually, followed by automatic fine registration.
 - **Accurate and robust**: It employs a pixel-level direct LiDAR-camera registration algorithm that is more robust and accurate compared to edge-based indirect LiDAR-camera registration.
 
 ![213393920-501f754f-c19f-4bab-af82-76a70d2ec6c6](https://user-images.githubusercontent.com/31344317/213427328-ddf72a71-9aeb-42e8-86a5-9c2ae19890e3.jpg)

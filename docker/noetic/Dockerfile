@@ -12,7 +12,7 @@ RUN git clone https://github.com/ceres-solver/ceres-solver \
   && git checkout e47a42c2957951c9fafcca9995d9927e15557069 \
   && mkdir build \
   && cd build \
-  && cmake .. -DBUILD_EXAMPLES=OFF -DBUILD_TESTING=OFF -DUSE_CUDA=OFF \
+  && cmake .. -DBUILD_EXAMPLES=OFF -DBUILD_TESTING=OFF \
   && make -j$(nproc) \
   && make install \
   && rm -rf /root/ceres-solver

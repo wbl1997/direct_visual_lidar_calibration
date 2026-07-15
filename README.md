@@ -5,7 +5,7 @@ This package provides a toolbox for LiDAR-camera calibration that is:
 - **Generalizable**: It can handle various LiDAR and camera projection models including spinning and non-repetitive scan LiDARs, and pinhole, fisheye, and omnidirectional projection cameras.
 - **Target-less**: It does not require a calibration target but uses the environment structure and texture for calibration.
 - **Single-shot**: At a minimum, only one pairing of a LiDAR point cloud and a camera image is required for calibration. Optionally, multiple LiDAR-camera data pairs can be used for improving the accuracy.
-- **Automatic**: The calibration process is automatic and does not require an initial guess.
+- **Manual initialization**: The initial LiDAR-camera pose is selected manually, followed by automatic fine registration.
 - **Accurate and robust**: It employs a pixel-level direct LiDAR-camera registration algorithm that is more robust and accurate compared to edge-based indirect LiDAR-camera registration.
 
 **Documentation: [https://koide3.github.io/direct_visual_lidar_calibration/](https://koide3.github.io/direct_visual_lidar_calibration/)**  
@@ -25,7 +25,6 @@ This package provides a toolbox for LiDAR-camera calibration that is:
 - [GTSAM](https://gtsam.org/)
 - [Ceres](http://ceres-solver.org/)
 - [Iridescence](https://github.com/koide3/iridescence)
-- [SuperGlue](https://github.com/magicleap/SuperGluePretrainedNetwork) [optional]
 
 ## Getting started
 

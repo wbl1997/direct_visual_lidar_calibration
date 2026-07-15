@@ -67,25 +67,7 @@ $ ls livox_preprocessed/
 # rosbag2_2023_03_09-13_44_10_lidar_indices.png      rosbag2_2023_03_09-13_44_54.ply                    rosbag2_2023_03_09-13_46_54_lidar_indices.png
 ```
 
-### 3a. Initial guess (Automatic)
-
-!!!warning
-    SuperGlue is not allowed to be used for commercial purposes. If you are working for profit, use the manual initial guess estimation instead.
-
-Run SuperGlue to find correspondences between LiDAR can camera images. Because SuperGlue requires the upward directions of images are roughtly aligned, add ```---rotate_camera 90``` option to rotate camera images:
-```bash
-$ ros2 run direct_visual_lidar_calibration find_matches_superglue.py livox_preprocessed --rotate_camera 90
-```
-
-Then, run ```initial_guess_auto``` to perform RANSAC-based initial guess estimation:
-```bash
-$ ros2 run direct_visual_lidar_calibration initial_guess_auto livox_preprocessed
-```
-
-![rosbag2_2023_03_09-13_42_46_superglue](https://user-images.githubusercontent.com/31344317/228459350-d1d4c83a-53b7-409f-bddd-d548a08b3c9f.jpg)
-
-
-### 3b. Initial guess (Manual)
+### 3a. Initial guess (Manual)
 
 ```bash
 $ ros2 run direct_visual_lidar_calibration initial_guess_manual livox_preprocessed
@@ -232,17 +214,7 @@ $ ros2 run direct_visual_lidar_calibration preprocess ouster ouster_preprocessed
 <iframe width="560" height="315" src="https://www.youtube.com/embed/81EqDhUwzXE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
 
-### 3a. Initial guess (Automatic)
-
-!!!warning
-    SuperGlue is not allowed to be used for commercial purposes.
-
-```bash
-$ ros2 run direct_visual_lidar_calibration find_matches_superglue.py ouster_preprocessed
-$ ros2 run direct_visual_lidar_calibration initial_guess_auto ouster_preprocessed
-```
-
-### 3b. Initial guess (Manual)
+### 3a. Initial guess (Manual)
 
 ```bash
 $ ros2 run direct_visual_lidar_calibration initial_guess_manual ouster_preprocessed

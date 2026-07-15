@@ -169,30 +169,6 @@ auto intensity_gradient(const T& t, size_t i) {
 }
 
 template <typename T>
-auto time_gpu(const T& t, size_t i) {
-  return traits<T>::time_gpu(t, i);
-}
-
-template <typename T>
-auto point_gpu(const T& t, size_t i) {
-  return traits<T>::point_gpu(t, i);
-}
-
-template <typename T>
-auto normal_gpu(const T& t, size_t i) {
-  return traits<T>::normal_gpu(t, i);
-}
-
-template <typename T>
-auto cov_gpu(const T& t, size_t i) {
-  return traits<T>::cov_gpu(t, i);
-}
-
-template <typename T>
-auto intensity_gpu(const T& t, size_t i) {
-  return traits<T>::intensity_gpu(t, i);
-}
-
 }  // namespace frame
 
 }  // namespace vlcal
