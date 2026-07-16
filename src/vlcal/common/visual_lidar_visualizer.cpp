@@ -1,8 +1,13 @@
 #include <vlcal/common/visual_lidar_visualizer.hpp>
 
+#include <algorithm>
+#include <cmath>
 #include <opencv2/highgui.hpp>
 #include <glk/texture_opencv.hpp>
+#include <guik/camera/arcball_camera_control.hpp>
 #include <guik/viewer/light_viewer.hpp>
+
+#include <vlcal/common/estimate_fov.hpp>
 
 namespace vlcal {
 
@@ -79,6 +84,36 @@ void VisualLiDARVisualizer::ui_callback() {
 
 void VisualLiDARVisualizer::set_T_camera_lidar(const Eigen::Isometry3d& T_camera_lidar) {
   this->T_camera_lidar = T_camera_lidar;
+}
+
+void VisualLiDARVisualizer::set_view_camera(const Eigen::Isometry3d& T_lidar_camera) {
+  auto viewer = guik::LightViewer::instance();
+  const Eigen::Isometry3f T_world_camera =
+    T_lidar_camera.cast<float>() * Eigen::AngleAxisf(M_PI, Eigen::Vector3f::UnitY()) * Eigen::AngleAxisf(M_PI, Eigen::Vector3f::UnitZ());
+
+  double max_distance = 1.0;
+  const Eigen::Vector3f eye = T_world_camera.translation();
+  for (size_t i = 0; i < dataset[0]->points->size(); i++) {
+    const Eigen::Vector3f point = dataset[0]->points->points[i].head<3>().cast<float>();
+    max_distance = std::max(max_distance, static_cast<double>((point - eye).norm()));
+  }
+  const float distance = static_cast<float>(std::max(1.0, max_distance * 0.1));
+
+  Eigen::Matrix3f camera_orientation;
+  camera_orientation << 0.0f, 1.0f, 0.0f,
+                        0.0f, 0.0f, 1.0f,
+                        1.0f, 0.0f, 0.0f;
+  const Eigen::Quaternionf orientation(T_world_camera.rotation() * camera_orientation);
+  const Eigen::Vector3f center = eye + T_world_camera.rotation() * Eigen::Vector3f(0.0f, 0.0f, -distance);
+
+  auto camera_control = std::make_shared<guik::ArcBallCameraControl>(distance, orientation);
+  camera_control->lookat(center);
+  viewer->set_camera_control(camera_control);
+
+  const auto image_size = dataset[0]->image.size();
+  const Eigen::Vector3d top_center = estimate_direction(proj, {image_size.width * 0.5, 0.0});
+  const double vertical_fov = 2.0 * std::acos(std::clamp(top_center.normalized().z(), -1.0, 1.0)) * 180.0 / M_PI;
+  viewer->use_perspective_projection_control(static_cast<float>(vertical_fov), 0.01f, 1000.0f);
 }
 
 bool VisualLiDARVisualizer::spin_once() {

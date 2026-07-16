@@ -31,6 +31,7 @@ public:
 
   void set_blend_weight(float weight) { blend_weight = weight; }
   void set_T_camera_lidar(const Eigen::Isometry3d& T_camera_lidar);
+  void set_view_camera(const Eigen::Isometry3d& T_lidar_camera);
 
   int get_selected_bag_id() const { return selected_bag_id; }
   double get_image_display_scale() const { return image_display_scale; }

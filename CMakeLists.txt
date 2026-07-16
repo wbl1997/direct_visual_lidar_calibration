@@ -25,6 +25,8 @@ find_package(Ceres REQUIRED)
 find_package(GTSAM REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(Boost REQUIRED COMPONENTS filesystem program_options date_time)
+find_package(fmt CONFIG REQUIRED)
+find_package(glfw3 CONFIG REQUIRED)
 find_package(Iridescence REQUIRED)
 
 set(OLD_DISTRO "humble;galactic;foxy")
@@ -74,7 +76,7 @@ target_include_directories(direct_visual_lidar_calibration PUBLIC
   ${OpenCV_INCLUDE_DIRS}
 )
 target_link_libraries(direct_visual_lidar_calibration
-  fmt
+  fmt::fmt
   ${Boost_LIBRARIES}
   ${PCL_LIBRARIES}
   ${CERES_LIBRARIES}

@@ -132,8 +132,18 @@ public:
       init_T_lidar_camera.linear() = (Eigen::AngleAxisd(-M_PI_2, Eigen::Vector3d::UnitX())).toRotationMatrix();
     }
 
+    if (config.count("results") && config["results"].count("init_T_lidar_camera")) {
+      const std::vector<double> values = config["results"]["init_T_lidar_camera"];
+      if (values.size() >= 7) {
+        init_T_lidar_camera.translation() << values[0], values[1], values[2];
+        init_T_lidar_camera.linear() = Eigen::Quaterniond(values[6], values[3], values[4], values[5]).normalized().toRotationMatrix();
+      }
+    }
+
     auto viewer = guik::LightViewer::instance();
     guik::ModelControl T_lidar_camera_gizmo("T_lidar_camera", init_T_lidar_camera.matrix().cast<float>());
+    vis->set_view_camera(init_T_lidar_camera);
+
     viewer->register_ui_callback("gizmo", [&] {
       auto& io = ImGui::GetIO();
       if (!io.WantCaptureMouse && io.MouseClicked[1]) {
@@ -189,6 +199,7 @@ public:
         const auto T_camera_lidar = picking->estimate();
         if (T_camera_lidar) {
           T_lidar_camera_gizmo.set_model_matrix(T_camera_lidar->inverse().cast<float>().matrix());
+          vis->set_view_camera(T_camera_lidar->inverse());
         }
       }
 

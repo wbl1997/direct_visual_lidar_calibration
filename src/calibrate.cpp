@@ -93,6 +93,7 @@ public:
 
     VisualLiDARVisualizer vis(proj, dataset, false);
     vis.set_T_camera_lidar(init_T_camera_lidar);
+    vis.set_view_camera(init_T_lidar_camera);
 
     VisualCameraCalibrationParams params;
     params.disable_z_buffer_culling = vm.count("disable_culling");

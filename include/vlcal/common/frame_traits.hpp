@@ -168,7 +168,6 @@ auto intensity_gradient(const T& t, size_t i) {
   return traits<T>::intensity_gradient(t, i);
 }
 
-template <typename T>
 }  // namespace frame
 
 }  // namespace vlcal

@@ -94,6 +94,7 @@ public:
 
     vis.reset(new VisualLiDARVisualizer(proj, dataset, false));
     vis->set_T_camera_lidar(T_lidar_camera[selected_transformation].inverse());
+    vis->set_view_camera(T_lidar_camera[selected_transformation]);
 
     viewer->register_ui_callback("callback", [this] { ui_callback(); });
   }
@@ -106,6 +107,7 @@ public:
 
     if (ImGui::Combo("Transformation", &selected_transformation, labels.data(), labels.size())) {
       vis->set_T_camera_lidar(T_lidar_camera[selected_transformation].inverse());
+      vis->set_view_camera(T_lidar_camera[selected_transformation]);
     }
 
     ImGui::End();
